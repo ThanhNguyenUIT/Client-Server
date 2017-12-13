@@ -22,6 +22,7 @@ public class Server extends Thread {
 	private ServerSocket serverSocket;
 	private List<Student> students;
 	private Socket server;
+	private StudentController studentController = new StudentController();
 
 	public Server(int port) throws IOException {
 		serverSocket = new ServerSocket(port);
@@ -40,33 +41,8 @@ public class Server extends Thread {
 				DataInputStream input = new DataInputStream(server.getInputStream());
 				String path = input.readUTF();
 
-				if (path.equals("RecieveData")) {
-					
-					System.out.println("Receive a read data request...");
-					System.out.println("Sending...");
-					
-					students = new ArrayList<>();
-					students = (ArrayList<Student>) JDBCStatement.readData();
-
-					ObjectOutputStream output = new ObjectOutputStream(server.getOutputStream());
-					output.writeObject(students);
-					
-					System.out.println("Sent!");
-
-				} else if (path.equals("SendData")) {
-					List<Student> students = new ArrayList<>();
-					
-					System.out.println("Receive a insert data request...");
-					System.out.println("Inserting...");
-					
-					ObjectInputStream objectInput = new ObjectInputStream(server.getInputStream());
-
-					students = (ArrayList<Student>) objectInput.readObject();
-
-					Insert.insertInfo((ArrayList<Student>) students);
-					
-					System.out.println("Insert done!");
-				}
+				// call controller to process request
+				studentController.processRequest(path);
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (ClassNotFoundException e) {

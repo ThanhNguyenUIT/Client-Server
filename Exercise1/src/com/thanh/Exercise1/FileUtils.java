@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class ReadFile {
+public class FileUtils {
 	public static List<Student> getListStudent(String fileUrl) {
 		List<Student> listSt = new ArrayList<>();
 		

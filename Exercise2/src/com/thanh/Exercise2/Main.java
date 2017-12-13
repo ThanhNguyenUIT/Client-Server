@@ -77,7 +77,7 @@ public class Main {
 
 		frame.getContentPane().add(btnBrowse);
 
-		btnInsert = new JButton("Insert");
+		btnInsert = new JButton("DatabaseUtils");
 
 		btnInsert.setBounds(87, 123, 80, 29);
 		frame.getContentPane().add(btnInsert);
