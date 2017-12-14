@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import com.thanh.Exercise1.ReadFile;
+import com.thanh.Exercise1.FileUtils;
 import com.thanh.Exercise1.Student;
 
 public class Client {
@@ -40,7 +40,7 @@ public class Client {
 		initialize();
 
 		btnBrowse.addActionListener(e -> {
-			filePath = new ChooseFile().chooseFile();
+			filePath = FileUtils.chooseFile();
 			textField.setText(filePath);
 		});
 
@@ -51,7 +51,7 @@ public class Client {
 				client = new ConnectServer().connectServer(host, port);
 				System.out.println("Sending...");
 				
-				students = (ArrayList<Student>) ReadFile.getListStudent(filePath);
+				students = (ArrayList<Student>) FileUtils.getListStudent(filePath);
 
 				ObjectOutputStream output = new ObjectOutputStream(client.getOutputStream());
 				output.writeObject(students);

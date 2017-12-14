@@ -11,7 +11,7 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
-import com.thanh.Exercise1.ReadFile;
+import com.thanh.Exercise1.FileUtils;
 import com.thanh.Exercise1.Student;
 
 public class Server extends Thread {
@@ -41,7 +41,7 @@ public class Server extends Thread {
 				students = (ArrayList<Student>) input.readObject();
 				System.out.println("Receive!");
 				
-				ReadFile.printData(students);
+				FileUtils.printListStudent(students);
 				
 			} catch (SocketTimeoutException s) {
 				System.out.println("Socket timed out!");

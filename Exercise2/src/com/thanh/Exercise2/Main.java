@@ -1,17 +1,15 @@
 package com.thanh.Exercise2;
 
 import java.awt.EventQueue;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import com.thanh.Exercise1.ReadFile;
+import com.thanh.Exercise1.FileUtils;
 import com.thanh.Exercise1.Student;
 
 public class Main {
@@ -39,21 +37,18 @@ public class Main {
 	public Main() {
 		initialize();
 		btnBrowse.addActionListener(e -> {
-
-			JFileChooser fc = new JFileChooser();
-			fc.showOpenDialog(null);
-			File f = fc.getSelectedFile();
-			filePath = f.getAbsolutePath();
+			filePath = FileUtils.chooseFile();
 			link.setText(filePath);
 		});
+		
 		btnInsert.addActionListener(e -> {
-			List<Student> listStudent = ReadFile.getListStudent(filePath);
-			Insert.insertInfo((ArrayList<Student>) listStudent);
+			List<Student> listStudent = FileUtils.getListStudent(filePath);
+			DatabaseUtils.insertStudents((ArrayList<Student>) listStudent);
 		});
 
 		btnShow.addActionListener(e -> {
-			List<Student> students = (ArrayList<Student>) JDBCStatement.readData();
-			ReadFile.printData(students);
+			List<Student> students = (ArrayList<Student>) DatabaseUtils.readStudents();
+			FileUtils.printListStudent(students);
 		});
 	}
 
@@ -74,11 +69,9 @@ public class Main {
 
 		btnBrowse = new JButton("Browse");
 		btnBrowse.setBounds(262, 67, 117, 29);
-
 		frame.getContentPane().add(btnBrowse);
 
-		btnInsert = new JButton("DatabaseUtils");
-
+		btnInsert = new JButton("Insert");
 		btnInsert.setBounds(87, 123, 80, 29);
 		frame.getContentPane().add(btnInsert);
 
