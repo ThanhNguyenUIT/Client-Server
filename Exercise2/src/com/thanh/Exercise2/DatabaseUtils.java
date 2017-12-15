@@ -22,8 +22,8 @@ public class DatabaseUtils {
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-				String sql = "Insert into student(last_name,first_name,birth_day,email) values('" + st.getFirstName()
-						+ "','" + st.getLastName() + "','" + st.getBirthDay() + "','" + st.getEmail() + "')";
+				String sql = "Insert into student(last_name,first_name,birth_day,email) values('" + st.getLastName()
+						+ "','" + st.getFirstName() + "','" + st.getBirthDay() + "','" + st.getEmail() + "')";
 				try {
 					statement.executeUpdate(sql);
 				} catch (SQLException e) {
