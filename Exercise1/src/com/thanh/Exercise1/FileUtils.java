@@ -22,7 +22,7 @@ public class FileUtils {
 		
 		try {
 			fis = new FileInputStream(fileUrl);
-			isr = new InputStreamReader(fis);
+			isr = new InputStreamReader(fis, "UTF-8");
 			br = new BufferedReader(isr);
 			
 			String line = br.readLine();
